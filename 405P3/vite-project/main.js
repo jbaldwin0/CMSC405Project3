@@ -108,17 +108,35 @@ pointLight.position.set(0,45,-90);
 //const lightHelper = new THREE.PointLightHelper(pointLight);
 var ambientLight = new THREE.AmbientLight(0x3a3b4c, 0.6);
 var ambientRed = new THREE.AmbientLight(0xff0000, 0.6);
-var ambientBlue = new THREE.AmbientLight(0x0000ff, 0.6);;
+
+var spotRed = new THREE.SpotLight(0xff0000, 0.5, 0, Math.PI/16);
+spotRed.position.set(0, 45, 90);
+spotRed.target.position.set(5, 5, 5);
+scene.add(spotRed);
+scene.add(spotRed.target);
+
+var spotGreen = new THREE.SpotLight(0x00ff00, 0.5, 0, Math.PI/16);
+spotGreen.position.set(90, 45, 0);
+spotGreen.target.position.set(5, 5, 5);
+scene.add(spotGreen);
+scene.add(spotGreen.target);
+
+var spotBlue = new THREE.SpotLight(0x0000ff, 0.5, 0, Math.PI/16);
+spotBlue.position.set(-90, 45, 0);
+spotBlue.target.position.set(5, 5, 5);
+scene.add(spotBlue);
+scene.add(spotBlue.target);
 
 scene.add(ambientLight);
 scene.add(ambientRed);
-scene.add(ambientBlue);
 scene.add(pointLight);
 //scene.add(lightHelper);
 scene.background = new THREE.Color(0x18191a);
 
 ambientRed.visible = false;
-ambientBlue.visible = false;
+spotRed.visible = false;
+spotGreen.visible = false;
+spotBlue.visible = false;
 
 
 // Controlling objects
@@ -135,18 +153,24 @@ function animate() {
   }
   if (option1.checked) {
     ambientRed.visible = false;
-    ambientBlue.visible = false;
     ambientLight.visible = true;
+    spotRed.visible = false;
+    spotGreen.visible = false;
+    spotBlue.visible = false;
   }
   if (option2.checked) {
     ambientRed.visible = true;
-    ambientBlue.visible = false;
     ambientLight.visible = false;
+    spotRed.visible = false;
+    spotGreen.visible = false;
+    spotBlue.visible = false;
   }
   if (option3.checked) {
     ambientRed.visible = false;
-    ambientBlue.visible = true;
     ambientLight.visible = false;
+    spotRed.visible = true;
+    spotGreen.visible = true;
+    spotBlue.visible = true;
   }
   octaSlider.oninput = function() {
     var x = this.value;
