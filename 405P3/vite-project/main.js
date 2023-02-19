@@ -18,9 +18,13 @@ renderer.render(scene, camera);
 // Adding shapes
 function addTorus(x, y, z, rotate) {
   const geometry = new THREE.TorusGeometry(20, 7, 16, 100);
-  const material = new THREE.MeshPhongMaterial({
+  const material = new THREE.MeshStandardMaterial({
     color: 0xe0b0ff, 
-    shininess: 50
+    roughness: 0.3,
+    metalness: 1.0,
+    transparent: 0.5,
+    emissive: 0xe0b0ff,
+    emissiveIntensity: 0.12,
   });
   const torus = new THREE.Mesh(geometry, material);
   torus.rotateX(rotate);
@@ -100,6 +104,12 @@ function addUFO(x, y, z) {
 }
 addUFO(-5, 10, -15);
 
+var model;
+function addModel() {
+  model = new THREE.Object3D();
+  
+}
+
 
 
 // Adding lights
@@ -111,19 +121,19 @@ var ambientRed = new THREE.AmbientLight(0xff0000, 0.6);
 
 var spotRed = new THREE.SpotLight(0xff0000, 0.5, 0, Math.PI/16);
 spotRed.position.set(0, 45, 90);
-spotRed.target.position.set(5, 5, 5);
+spotRed.target.position.set(0, 0, 0);
 scene.add(spotRed);
 scene.add(spotRed.target);
 
 var spotGreen = new THREE.SpotLight(0x00ff00, 0.5, 0, Math.PI/16);
 spotGreen.position.set(90, 45, 0);
-spotGreen.target.position.set(5, 5, 5);
+spotGreen.target.position.set(0, 0, 0);
 scene.add(spotGreen);
 scene.add(spotGreen.target);
 
 var spotBlue = new THREE.SpotLight(0x0000ff, 0.5, 0, Math.PI/16);
 spotBlue.position.set(-90, 45, 0);
-spotBlue.target.position.set(5, 5, 5);
+spotBlue.target.position.set(0, 0, 0);
 scene.add(spotBlue);
 scene.add(spotBlue.target);
 
@@ -141,16 +151,20 @@ spotBlue.visible = false;
 
 // Controlling objects
 
-const controls = new OrbitControls(camera, renderer.domElement);
-// Drawing the scene
-var animateUFO = document.getElementById("rotateUFO");
-var option1 = document.getElementById("Op1");
-var option2 = document.getElementById("Op2");
-var option3 = document.getElementById("Op3");
-function animate() {
+function UFOCheck() {
   if (animateUFO.checked) {
     ufo.rotation.y += 0.01;
   }
+}
+
+function sliderCheck() {
+  octaSlider.oninput = function() {
+    var x = this.value;
+    octahedron.scale.set(x, x, x);
+  }
+}
+
+function lightCheck() {
   if (option1.checked) {
     ambientRed.visible = false;
     ambientLight.visible = true;
@@ -172,10 +186,18 @@ function animate() {
     spotGreen.visible = true;
     spotBlue.visible = true;
   }
-  octaSlider.oninput = function() {
-    var x = this.value;
-    octahedron.scale.set(x, x, x);
-  }
+}
+
+const controls = new OrbitControls(camera, renderer.domElement);
+var animateUFO = document.getElementById("rotateUFO");
+var option1 = document.getElementById("Op1");
+var option2 = document.getElementById("Op2");
+var option3 = document.getElementById("Op3");
+// Drawing the scene
+function animate() {
+  UFOCheck();
+  sliderCheck();
+  lightCheck();
 	requestAnimationFrame(animate);
 	controls.update();
 	renderer.render(scene, camera);
