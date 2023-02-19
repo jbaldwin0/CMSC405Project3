@@ -1,0 +1,19 @@
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+div {
+  position: absolute;
+  background-color: #e4e6eb;
+  border-radius: 4px;
+  padding: 0.4em;
+  margin: 0.2em;
+  z-index: 99;
+}
+
+.bold {
+  font-weight: bolder;
+}
