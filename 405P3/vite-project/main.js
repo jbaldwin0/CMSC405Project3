@@ -96,7 +96,6 @@ function addUFO(x, y, z) {
   ufo.add(sphere.clone());
   ufo.add(saucer);
   ufo.position.set(x, y, z);
-  //ufo.rotateZ(Math.PI/6);
   scene.add(ufo);
 }
 addUFO(-5, 10, -15);
@@ -107,12 +106,19 @@ addUFO(-5, 10, -15);
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(0,45,-90);
 //const lightHelper = new THREE.PointLightHelper(pointLight);
-const ambientLight = new THREE.AmbientLight(0x3a3b4c, 0.6);
+var ambientLight = new THREE.AmbientLight(0x3a3b4c, 0.6);
+var ambientRed = new THREE.AmbientLight(0xff0000, 0.6);
+var ambientBlue = new THREE.AmbientLight(0x0000ff, 0.6);;
 
 scene.add(ambientLight);
+scene.add(ambientRed);
+scene.add(ambientBlue);
 scene.add(pointLight);
 //scene.add(lightHelper);
 scene.background = new THREE.Color(0x18191a);
+
+ambientRed.visible = false;
+ambientBlue.visible = false;
 
 
 // Controlling objects
@@ -120,9 +126,27 @@ scene.background = new THREE.Color(0x18191a);
 const controls = new OrbitControls(camera, renderer.domElement);
 // Drawing the scene
 var animateUFO = document.getElementById("rotateUFO");
+var option1 = document.getElementById("Op1");
+var option2 = document.getElementById("Op2");
+var option3 = document.getElementById("Op3");
 function animate() {
-  if (animateUFO.checked){
+  if (animateUFO.checked) {
     ufo.rotation.y += 0.01;
+  }
+  if (option1.checked) {
+    ambientRed.visible = false;
+    ambientBlue.visible = false;
+    ambientLight.visible = true;
+  }
+  if (option2.checked) {
+    ambientRed.visible = true;
+    ambientBlue.visible = false;
+    ambientLight.visible = false;
+  }
+  if (option3.checked) {
+    ambientRed.visible = false;
+    ambientBlue.visible = true;
+    ambientLight.visible = false;
   }
   octaSlider.oninput = function() {
     var x = this.value;
