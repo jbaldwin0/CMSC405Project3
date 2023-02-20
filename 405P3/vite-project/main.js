@@ -1,5 +1,5 @@
 /*
-  Arthur Baldwin CMSC 405 6381 Project 3 02/19/2023
+  Arthur Baldwin CMSC 405 6380 Project 3 02/19/2023
   This file contains the javascript for the third project.
   It uses three.js to create 6 different shapes, and contains multiple
   lighting effects. Additionally, it provides methods used by widgets
