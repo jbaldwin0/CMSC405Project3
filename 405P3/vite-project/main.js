@@ -1,4 +1,10 @@
-
+/*
+  Arthur Baldwin CMSC 405 6381 Project 3 02/19/2023
+  This file contains the javascript for the third project.
+  It uses three.js to create 6 different shapes, and contains multiple
+  lighting effects. Additionally, it provides methods used by widgets
+  to create changes in the scene.
+*/
 import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -105,6 +111,12 @@ function addUFO(x, y, z) {
 }
 addUFO(-5, 10, -15);
 
+/* 
+This work is based on "Stylized Well Low-poly Free" 
+(https://sketchfab.com/3d-models/stylized-well-low-poly-free-7c036ac4cf6c4a6fb641ca6803c5292a) 
+by Just Jane 666 (https://sketchfab.com/JustJane666) 
+licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+*/
 const loader = new GLTFLoader();
 loader.load( './well/scene.gltf', ( gltf ) => {
   gltf.scene.scale.set(100, 100, 100);
@@ -149,7 +161,6 @@ spotGreen.visible = false;
 spotBlue.visible = false;
 
 // Controlling objects
-
 function UFOCheck() {
   if (animateUFO.checked) {
     ufo.rotation.y += 0.01;
