@@ -1,7 +1,8 @@
 
 import './style.css'
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -104,13 +105,12 @@ function addUFO(x, y, z) {
 }
 addUFO(-5, 10, -15);
 
-var model;
-function addModel() {
-  model = new THREE.Object3D();
-  
-}
-
-
+const loader = new GLTFLoader();
+loader.load( './well/scene.gltf', ( gltf ) => {
+  gltf.scene.scale.set(100, 100, 100);
+  gltf.scene.position.set(0, 1.1, 0);
+	scene.add( gltf.scene );
+});
 
 // Adding lights
 const pointLight = new THREE.PointLight(0xffffff);
@@ -147,7 +147,6 @@ ambientRed.visible = false;
 spotRed.visible = false;
 spotGreen.visible = false;
 spotBlue.visible = false;
-
 
 // Controlling objects
 
@@ -202,5 +201,4 @@ function animate() {
 	controls.update();
 	renderer.render(scene, camera);
 }
-
 animate();
