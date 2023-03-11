@@ -2,7 +2,7 @@ This project was made based on the instructions provided in the project3.pdf fil
 The main purpose of this project was learning to use Three.js and to create a scene using the tools learned.
 Setting up the project I used Vite. This project can be setup using the commands:
 
-1. npm init @vitejs/app (using the vanilla js option
+1. npm init @vitejs/app (using the vanilla js option)
 2. npm install three
 3. npm run dev
 
